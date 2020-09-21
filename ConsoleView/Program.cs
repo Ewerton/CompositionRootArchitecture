@@ -14,8 +14,6 @@ namespace View
 {
     class Program
     {
-        static Container container;
-
         static void Main(string[] args)
         {
             RegisterDependencies();
@@ -27,20 +25,18 @@ namespace View
 
         private static void RegisterDependencies()
         {
-            container = new Container();
+            CompositionRoot.CompositionRoot.RegisterDependencies();
 
-            CompositionRoot.CompositionRoot.RegisterDependencies(container);
-
-            /// The dependencies of the View (in this case, a Console View) still should be registered in the View and not in the CompositionRoot to not cause a circular dependency.
-            container.Register<BlogAdministrationScreen>();
-            container.Verify();
+            // The dependencies of the View (in this case, a Console View) still should be registered in the View and not in the CompositionRoot to not cause a circular dependency. 
+            CompositionRoot.CompositionRoot.Register<BlogAdministrationScreen>();
+            
+            CompositionRoot.CompositionRoot.Verify();
         }
 
         private static void DoSomeTest()
         {
-            // Just creating some stuff to see the program working
-
-            BlogAdministrationScreen screen = container.GetInstance<BlogAdministrationScreen>();
+            // If we need to resolve some dependency, ask it to the CompositionRoot
+            BlogAdministrationScreen screen = CompositionRoot.CompositionRoot.GetInstance<BlogAdministrationScreen>();
 
             string blogname = "My Awesome Blog";
 
