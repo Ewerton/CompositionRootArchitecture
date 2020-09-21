@@ -17,8 +17,6 @@ namespace AspNetCoreMvcWebView
 {
     public class Startup
     {
-        //private Container container = new SimpleInjector.Container();
-
         public Startup(IConfiguration configuration)
         {
             // Set to false. This will be the default in v5.x and going forward.
@@ -34,7 +32,10 @@ namespace AspNetCoreMvcWebView
         {
             services.AddControllersWithViews();
 
+            // This is the integration enforced by Microsoft :(
             CompositionRoot.CompositionRoot.ConfigureServices(services);
+            
+            // Register our dependencies.
             CompositionRoot.CompositionRoot.RegisterDependencies();
         }
 

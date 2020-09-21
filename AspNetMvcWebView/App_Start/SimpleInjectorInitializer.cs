@@ -21,7 +21,7 @@ namespace AspNetMvcWebView
         {
             CompositionRoot.RegisterDependencies(new WebRequestLifestyle());
 
-            // Mvc Controllers are dependencies of the view and should be registered as follows and not in the CompositionRoot to avoid circular dependency.
+            // Mvc Controllers are dependencies of the view and the SImpleInjector offers the RegisterMvcControllers() extension method, so we can call it from the CompositionRoot.dll
             CompositionRoot.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 
             DependencyResolver.SetResolver(CompositionRoot.GetDependencyResolver());
