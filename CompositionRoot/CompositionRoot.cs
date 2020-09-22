@@ -74,9 +74,9 @@ namespace CompositionRoot
             });
         }
 
-        public static void Register<TS, TI>() where TS : class where TI : class, TS
+        public static void Register<TService, TImpl>() where TService : class where TImpl : class, TService
         {
-            container.Register<TS, TI>();
+            container.Register<TService, TImpl>();
         }
 
         public static void RegisterMvcControllers(Assembly mvcAssembly)
