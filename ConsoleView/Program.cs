@@ -27,7 +27,8 @@ namespace View
         {
             CompositionRoot.CompositionRoot.RegisterDependencies();
 
-            // The dependencies of the View (in this case, a Console View) still should be registered in the View and not in the CompositionRoot to not cause a circular dependency. 
+            // The dependencies of the View (in this case, a Console View) still should be registered in the CompositionRoot.
+            // To do so ,we need to implement convenient methods in the COmpositionRoot class, like the Register<T>() below. 
             CompositionRoot.CompositionRoot.Register<BlogAdministrationScreen>();
             
             CompositionRoot.CompositionRoot.Verify();
